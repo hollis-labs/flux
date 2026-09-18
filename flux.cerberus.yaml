@@ -1,0 +1,26 @@
+kind: cerberus-project/v1
+owner: flux
+namespace: local
+project:
+  id: flux
+  name: Flux
+resources:
+  - id: flux-frontend
+    name: Flux Frontend
+    type: process
+    project: flux
+    connector: local
+    config:
+      command:
+        - npm
+        - run
+        - dev
+      dir: /Users/chrispian/dev/hollis-labs/apps/flux
+      mode: dev_session
+      port: 5176
+      run_from: workspace
+      url: http://localhost:5176
+    tags:
+      - gui
+      - frontend
+      - vite
