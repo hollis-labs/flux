@@ -11,7 +11,9 @@ backend's binary.
 > carries its own copy of this UI in `ui/` and still embeds the built output in
 > the `nanite` binary (`internal/server/spa.go`, `make build-ui`). This repo is
 > the standalone home the UI is moving to; until Nanite drops its embedded copy,
-> the two can diverge. Run Flux against Nanite's API as below.
+> the two can diverge. Landing that removal on `main` (splitting it out of the
+> unmerged `chore/extract-gui-to-flux` branch) is tracked internally as
+> CW-20260930-0016. Run Flux against Nanite's API as below.
 
 Run them side by side in development:
 
