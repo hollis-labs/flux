@@ -139,7 +139,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: Number(process.env.NANITE_UI_PORT) || 5176,
+    port: Number(process.env.NANITE_UI_PORT) || 5179,
     proxy: {
       '/api': {
         // Points at `nanite serve`. Overridable because 8090 is a popular

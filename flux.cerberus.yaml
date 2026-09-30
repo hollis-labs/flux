@@ -17,9 +17,9 @@ resources:
         - dev
       dir: /Users/chrispian/dev/hollis-labs/apps/flux
       mode: dev_session
-      port: 5176
+      port: 5179
       run_from: workspace
-      url: http://localhost:5176
+      url: http://localhost:5179
     tags:
       - gui
       - frontend
