@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
 
-const MODULE = 'github.com/hollis-labs/go-envelopes';
-const EXPORT_COMMAND = `${MODULE}/cmd/envelopes-export`;
+const MODULE = 'github.com/hollis-labs/libs/ui/ui-go';
+const EXPORT_COMMAND = `${MODULE}/envelopes/cmd/envelopes-export`;
 
 function runExporter(root, format) {
   const result = spawnSync(
@@ -15,14 +15,14 @@ function runExporter(root, format) {
   );
 
   if (result.error) {
-    throw new Error(`failed to start go-envelopes exporter: ${result.error.message}`);
+    throw new Error(`failed to start libs/ui/ui-go/envelopes exporter: ${result.error.message}`);
   }
   if (result.status !== 0) {
     const detail = result.stderr.trim() || `exit status ${result.status}`;
-    throw new Error(`go-envelopes exporter failed: ${detail}`);
+    throw new Error(`libs/ui/ui-go/envelopes exporter failed: ${detail}`);
   }
   if (!result.stdout) {
-    throw new Error('go-envelopes exporter returned empty output');
+    throw new Error('libs/ui/ui-go/envelopes exporter returned empty output');
   }
   return result.stdout;
 }
@@ -47,7 +47,7 @@ export function exportCatalog(root) {
   try {
     catalog = JSON.parse(raw);
   } catch (error) {
-    throw new Error(`go-envelopes exporter returned invalid catalog JSON: ${error.message}`);
+    throw new Error(`libs/ui/ui-go/envelopes exporter returned invalid catalog JSON: ${error.message}`);
   }
   if (catalog.formatVersion !== 1) {
     throw new Error(`unsupported envelope catalog format ${catalog.formatVersion ?? '<missing>'}`);
@@ -65,7 +65,7 @@ export function exportTypeScript(root) {
     new RegExp(`^// Source: ${MODULE.replaceAll('/', '\\/')}@([^;]+);.*manifest (sha256:[0-9a-f]+)\\.$`, 'm'),
   );
   if (!identity) {
-    throw new Error('generated TypeScript is missing go-envelopes source identity');
+    throw new Error('generated TypeScript is missing libs/ui/ui-go/envelopes source identity');
   }
   validateReleasedSource({
     module: MODULE,

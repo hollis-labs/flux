@@ -2,7 +2,7 @@
 
 The GUI for Nanite: a Vite + React 19 + Tailwind/shadcn (Radix) single-page app — first-run setup, model picker, Settings, chat surface, plugin panels. It talks to Nanite's headless HTTP API; it has no backend of its own.
 
-It is not: a Go project (the `go.mod` exists only to pin the envelope catalog exporter), the owner of envelope schemas (they live in `go-envelopes`), or a place for server logic. Backend behavior belongs in Nanite.
+It is not: a Go project (the `go.mod` exists only to pin the envelope catalog exporter), the owner of envelope schemas (they live in `libs/ui/ui-go/envelopes`), or a place for server logic. Backend behavior belongs in Nanite.
 
 ## Start Here
 
@@ -30,7 +30,7 @@ Env: `NANITE_UI_PORT` (default 5179), `NANITE_API_PORT` (default 8090). Envelope
 ## Boundaries
 
 - `src/generated/` is generator output — regenerate with `npm run generate:envelopes` / `generate:plugins`, never hand-edit. Guard: `npm run check:envelopes`.
-- Envelope types come from the released `go-envelopes` module pinned in `go.mod`. A new core type lands there first; then bump the pin here (and in Nanite), add the component under `src/components/chat/envelopes/`, and regenerate.
+- Envelope types come from the released `libs/ui/ui-go/envelopes` module pinned in `go.mod`. A new core type lands there first; then bump the pin here (and in Nanite), add the component under `src/components/chat/envelopes/`, and regenerate.
 - Plugins are loaded at runtime via `import(bundleUrl)` and share the host's React/shadcn through the importmap. Keep `HOST_ENTRIES` in `vite.config.ts` and `preserveEntrySignatures: 'strict'` intact, or plugin bundles lose exports.
 - All server calls go through `/api` (proxied in dev). Do not hard-code backend hosts or ports in source.
 - Nanite `main` still embeds its own `ui/` copy; this repo and that copy can diverge. Do not assume a change here reaches the shipped Nanite binary.

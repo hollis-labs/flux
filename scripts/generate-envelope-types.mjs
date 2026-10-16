@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Generate Nanite's host-neutral envelope data types from the exact released
- * go-envelopes version selected by this checkout's go.mod.
+ * libs/ui/ui-go/envelopes version selected by this checkout's go.mod.
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';

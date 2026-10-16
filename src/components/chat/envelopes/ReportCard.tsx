@@ -32,7 +32,7 @@ interface ReportCardData {
    * Optional link back to the full session/task/run this report distills
    * (a Torque run, a mux cross-app session, a subagent completion). Renders
    * as a real link — distinct from `actions`, which dispatch chat messages
-   * rather than navigate. See go-envelopes report-card.schema.json.
+   * rather than navigate. See libs/ui/ui-go/envelopes report-card.schema.json.
    */
   session_link?: SessionLink
 }

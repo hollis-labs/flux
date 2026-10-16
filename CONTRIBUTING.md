@@ -47,7 +47,7 @@ public branch should be treated as leaked even after you delete it.
 ## Things that surprise people
 
 - **`src/generated/` is generator output.** Regenerate it; never hand-edit.
-- **The envelope catalog lives in a released module** (`go-envelopes`), not in
+- **The envelope catalog lives in a released module** (`libs/ui/ui-go/envelopes`), not in
   this repo. New core types are released there first.
 - **Plugins share the host's React through an importmap.** Changes to
   `vite.config.ts` host entries can break runtime-loaded plugins without a
