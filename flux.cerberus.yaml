@@ -15,7 +15,7 @@ resources:
         - npm
         - run
         - dev
-      dir: /Users/chrispian/dev/hollis-labs/apps/flux
+      dir: ~/dev/hollis-labs/apps/flux
       mode: dev_session
       port: 5179
       run_from: workspace
