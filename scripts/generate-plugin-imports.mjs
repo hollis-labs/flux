@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Generates Nanite's React loader registry from the module-owned go-envelopes
-// catalog. Generic manifest/schema parsing stays in go-envelopes; this file
+// Generates Nanite's React loader registry from the module-owned libs/ui/ui-go/envelopes
+// catalog. Generic manifest/schema parsing stays in libs/ui/ui-go/envelopes; this file
 // owns only Nanite's component existence checks and host presentation policy.
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -24,6 +24,31 @@ const CORE_OVERRIDES = {
   'elicitation-prompt': { props: 'envelope' },
 };
 
+// The libs/ui/ui-go/envelopes manifest declares wire identity only; which
+// component renders a type is host policy and lives here (it was manifest
+// metadata through go-envelopes v0.4.x). `null` = backend-only, no component.
+const E = 'components/chat/envelopes';
+const HOST_COMPONENTS = {
+  'approval-card': [`${E}/ApprovalCard`, 'ApprovalCard'],
+  'artifact-mini': [`${E}/ArtifactMiniCard`, 'ArtifactMiniCard'],
+  'chat-loop-terminated': [`${E}/ChatLoopTerminatedCard`, 'ChatLoopTerminatedCard'],
+  'confirmation-card': [`${E}/primitives/ConfirmationCard`, 'ConfirmationCard'],
+  'diff-card': [`${E}/primitives/DiffCard`, 'DiffCard'],
+  'document-viewer': [`${E}/DocumentViewerCard`, 'DocumentViewerCard'],
+  'elicitation-prompt': [`${E}/ElicitationPromptCard`, 'ElicitationPromptCard'],
+  'error-report': [`${E}/ErrorCard`, 'ErrorCard'],
+  'info-card': [`${E}/primitives/InfoCard`, 'InfoCard'],
+  'list-card': [`${E}/primitives/ListCard`, 'ListCard'],
+  'metric-card': [`${E}/primitives/MetricCard`, 'MetricCard'],
+  'progress-card': [`${E}/primitives/ProgressCard`, 'ProgressCard'],
+  'proposal-card': [`${E}/ProposalCard`, 'ProposalCard'],
+  'report-card': [`${E}/ReportCard`, 'ReportCard'],
+  'session-task': null,
+  'subagent-spawn-approval': [`${E}/ApprovalCard`, 'ApprovalCard'],
+  'table-card': [`${E}/primitives/TableCard`, 'TableCard'],
+  'timeline-card': [`${E}/primitives/TimelineCard`, 'TimelineCard'],
+};
+
 const VALID_PROPS = new Set(['approval', 'proposal', 'envelope']);
 
 function coreEntries(catalog) {
@@ -31,12 +56,17 @@ function coreEntries(catalog) {
     if (entry.source !== 'core') {
       throw new Error(`build-time catalog unexpectedly contains non-core type ${entry.name}`);
     }
-    const metadata = entry.typescript?.import ?? {};
+    if (!(entry.name in HOST_COMPONENTS)) {
+      throw new Error(
+        `envelope ${entry.name}: no host component mapping; add it to HOST_COMPONENTS (null if backend-only)`,
+      );
+    }
+    const [component, exportName] = HOST_COMPONENTS[entry.name] ?? [];
     return {
       type: entry.name,
-      component: metadata.component,
-      export: metadata.export,
-      props: CORE_OVERRIDES[entry.name]?.props ?? metadata.props,
+      component,
+      export: exportName,
+      props: CORE_OVERRIDES[entry.name]?.props,
     };
   });
 }
@@ -99,7 +129,7 @@ export interface EnvelopeRegistryEntry {
   props?: "approval" | "proposal" | "envelope";
 }
 
-// --- CORE ENVELOPES (generated from the released go-envelopes catalog) ---
+// --- CORE ENVELOPES (generated from the released libs/ui/ui-go/envelopes catalog) ---
 const CORE_ENTRIES: Record<string, EnvelopeRegistryEntry> = {${backendOnly}
 ${withComponents.map(generateLazyImport).join('\n')}
 };

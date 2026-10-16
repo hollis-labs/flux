@@ -36,7 +36,7 @@ The dev server's ports come from `vite.config.ts` and can be overridden:
 ## Envelope types
 
 The chat surface renders structured "envelope" cards whose types and schemas
-are owned by the released [`github.com/hollis-labs/go-envelopes`](https://github.com/hollis-labs/go-envelopes)
+are owned by the released [`github.com/hollis-labs/libs/ui/ui-go/envelopes`](https://github.com/hollis-labs/libs/tree/main/ui/ui-go/envelopes)
 module, not by this repo or by Nanite. `go.mod` here pins the same module
 version Nanite's `go.mod` pins; a Go toolchain is required at build time only
 to run its exporter — this repo has no Go source of its own.
