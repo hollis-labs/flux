@@ -18,14 +18,14 @@ It is not: a Go project (the `go.mod` exists only to pin the envelope catalog ex
 
 ```sh
 npm ci
-npm run dev                # http://localhost:5179; /api -> Nanite :8090
+npm run dev                # http://localhost:5192; /api -> Nanite :8090
 npm run build              # tsc -b && vite build (runs generators first)
 npm run test -- --run      # vitest, single pass
 npm run lint               # biome check .
 npm run check:envelopes    # fails if generated envelope types are stale
 ```
 
-Env: `NANITE_UI_PORT` (default 5179), `NANITE_API_PORT` (default 8090). Envelope generation needs a Go toolchain (it runs `go tool envelopes-export`).
+Env: `NANITE_UI_PORT` (default 5192), `NANITE_API_PORT` (default 8090). Envelope generation needs a Go toolchain (it runs `go tool envelopes-export`).
 
 ## Boundaries
 

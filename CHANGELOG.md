@@ -11,6 +11,13 @@ briefly; it is good-faith, not exhaustive.
 
 ## [Unreleased]
 
+### Changed
+
+- Dev server default port moved from 5179 to 5192 (`vite.config.ts`, `flux.cerberus.yaml`,
+  README, AGENTS.md). 5179 collided with the Tachyon dev frontend in the Cerberus
+  registry ("TCP port 5179 is assigned to multiple local resources"). Override with
+  `NANITE_UI_PORT` as before.
+
 ## [0.0.1] - 2026-09-30
 
 ### Changed

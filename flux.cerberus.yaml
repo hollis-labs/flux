@@ -20,9 +20,9 @@ resources:
         - dev
       dir: ~/dev/hollis-labs/apps/flux
       mode: dev_session
-      port: 5179
+      port: 5192
       run_from: workspace
-      url: http://localhost:5179
+      url: http://localhost:5192
     tags:
       - gui
       - frontend

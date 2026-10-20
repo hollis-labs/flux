@@ -23,14 +23,14 @@ air   # or: go run ./cmd/nanite serve -port 8090 -db ./nanite.db -dev
 
 # Terminal 2, here
 npm ci
-npm run dev   # http://localhost:5179, proxies /api to Nanite at :8090
+npm run dev   # http://localhost:5192, proxies /api to Nanite at :8090
 ```
 
 The dev server's ports come from `vite.config.ts` and can be overridden:
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `NANITE_UI_PORT` | `5179` | Port for the Vite dev server |
+| `NANITE_UI_PORT` | `5192` | Port for the Vite dev server |
 | `NANITE_API_PORT` | `8090` | Port of the Nanite backend `/api` is proxied to |
 
 ## Envelope types
